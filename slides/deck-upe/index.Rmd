@@ -1,0 +1,136 @@
+---
+title       : Developing Data Products Course Project
+subtitle    : US Presidential Elections
+author      : Sangeeta Shah
+job         : 
+framework   : revealjs        # {io2012, html5slides, shower, dzslides, ...}
+revealjs    :
+    theme: night
+    transition: convex
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides  
+
+
+---#id1  
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap" rel="stylesheet">  
+
+<style>
+.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 { 
+    font-size: 2.4em; color: #bbb; padding-bottom: 10px;font-family: 'Kalam'; } 
+.reveal h1 { padding-bottom: 0; }
+.reveal h1, .reveal h2 { font-size: 1.8em; color:#fff }
+.reveal h3 { font-size: 1.4em; padding-bottom: 5px; }
+.reveal h4 { font-size: 1.2em; }
+.reveal h5 { font-size: 1em; }
+.reveal h6 { font-size: .8em; }
+.reveal ul, .reveal p { font-size: .8em; }
+.reveal pre { width: 95%; font-size: .45em; margin: 15px 0;}
+.reveal span.paraHeader { color: #17d; display: block; margin-bottom: 7px; font-family: 'Kalam'; font-size: 1.3em;}
+#id2, #id3, #id4 { text-align: left; color: #bbb; }
+#id3 h2, #id4 h4 { color: #17d; }
+#id4 h4 { margin-bottom: 0; }
+</style>
+
+
+## Party Voting Trends in US Presidential Elections At a Glance
+### A _Shiny App_ By [_Sangeeta Shah_](https://www.linkedin.com/in/sangeetashah)  
+&nbsp;  
+--------------------  
+&nbsp;  
+
+### [Data Science Specialization](https://www.coursera.org/specializations/jhu-data-science)
+##### Coursera | Johns Hopkins University  
+&nbsp;  
+
+### [Developing Data Products](https://www.coursera.org/learn/data-products/home/welcome)  
+#### Course Project   
+
+
+
+---#id2
+
+# The Assignment 
+
+Per the [course project page](https://www.coursera.org/learn/data-products/peer/tMYrn/course-project-shiny-application-and-reproducible-pitch)
+this assignment has 2 parts:  
+&nbsp;  
+
+<span class="paraHeader">A Shiny application</span> Creating a 
+[_shiny_](https://shiny.rstudio.com/) app with supporting documentation and a 
+_GitHub_ repository containing the app code.  
+
+Accordingly, a Shiny app [US Presidential Elections](https://shahstewart.shinyapps.io/US_PresidentialElections/) 
+was created and uploaded to [shinyio](https://www.shinyapps.io/) servers. The repository containing the data and 
+the code for the app is on [GitHub](https://github.com/shahstewart/Shiny1-USElections).  
+
+&nbsp;  
+
+<span class="paraHeader">A Reproducible Pitch Presentation</span> A five-slide presentation created using either 
+[_Slidify_](https://github.com/ramnathv/slidify)
+or [_Rstudio Presenter_](https://support.rstudio.com/hc/en-us/articles/200486468-Authoring-R-Presentations)
+and hosted on either GitHub or [RPubs](https://rpubs.com/shahstewart)
+containing embedded [R](https://www.r-project.org/) code that runs.  
+  
+This [current slide stack](https://rpubs.com/shahstewart/USPresElAppPitch), created in _Slidify_ constitutes 
+this second part of the assignment.
+
+
+---#id3
+
+## Why this app?
+
+- Instead of creating an example app with some old data for the sake of creating one for the project,
+  I wanted to create an app of some value that I can actually use, and expand into something bigger later on.  
+&nbsp;  
+- Immigrants like me, and many youngsters do not have the historical background about past elections.
+  This app will provide a handy tool and reference for a quick look up of data on past presidential elections.  
+&nbsp;  
+- This app, by no means, is comprehensive. However, it provides me with a starting point on which I can
+  build a more comprehensive presidential election data dashboard in near future.
+
+
+---#id4  
+
+## The App  
+This app shows a break-up of vote during US Presidential Elections along the party lines for years 1976 through 2020.
+You can see the vote break-up for all of US or per state. It allows users to select a year and a state to see 
+further deails.
+
+&nbsp;  
+
+#### What does it contain?
+- A US states map, that depicts the US Presidential Election Vote break-up by party and 
+  state in a user-specified year between 1976 and 2020.  
+&nbsp;  
+- It also has plots that illustrate how overall party vote proportions have changed with years 
+  from 1976 to 2020 in the country as a whole, and in the user-selected state.  
+&nbsp;  
+- You can also see detailed vote break-up for the state and year you have selected.
+
+
+---#id4
+
+## Sneak Peak
+To give you a little taste, I will show here one the plots and the code used for it. 
+
+```{r message=F, warning=F, error=F}
+library(plotly); library(htmlwidgets)
+data <- read.csv('processedData.csv'); data <- data[data$year == 2020,]
+g <- list(scope = 'usa', projection = list(type = 'albers usa'))
+plot <- plot_geo(data, locationmode = 'USA-states') %>% 
+    add_trace(z = ~percRep, locations = ~state_po, color = ~percRep, colorscale = 'Bluered',text = ~hover, hoverinfo = 'text') %>%
+    layout(title=list(text='Year 2020', y=.95, x = 0.02, font=list(size=24, family='Open Sans')), geo = g) %>%
+    colorbar(title = 'Percent Vote', y = .78, len=.8, thickness=12, limits = c(0, 100), tickvals = c(10, 90), ticktext = c('90+% \nDem', '90+% \nRep'))
+saveWidget(as_widget(plot), 'plot.html')
+```
+<iframe src="plot.html" width=100% height=350></iframe>
+
+
+
+
