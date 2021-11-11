@@ -32,8 +32,8 @@ knit        : slidify::knit2slides
 .reveal ul, .reveal p { font-size: .8em; }
 .reveal pre { width: 95%; font-size: .45em; margin: 15px 0;}
 .reveal span.paraHeader { color: #17d; display: block; margin-bottom: 7px; font-family: 'Kalam'; font-size: 1.3em;}
-#id2, #id3, #id4 { text-align: left; color: #bbb; }
-#id3 h2, #id4 h4 { color: #17d; }
+#id2, #id3, #id4, #id5 { text-align: left; color: #bbb; }
+#id3 h2, #id4 h4, #id5 h2 { color: #17d; }
 #id4 h4 { margin-bottom: 0; }
 </style>
 
@@ -114,7 +114,7 @@ further deails.
 - You can also see detailed vote break-up for the state and year you have selected.
 
 
----#id4
+---#id5
 
 ## Sneak Peak
 To give you a little taste, I will show here one the plots and the code used for it. 
