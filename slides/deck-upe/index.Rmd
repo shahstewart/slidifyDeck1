@@ -77,7 +77,7 @@ or [_Rstudio Presenter_](https://support.rstudio.com/hc/en-us/articles/200486468
 and hosted on either GitHub or [RPubs](https://rpubs.com/shahstewart)
 containing embedded [R](https://www.r-project.org/) code that runs.  
   
-This [current slide stack](https://shahstewart.github.io/slidifyPitchUSPresElections), created in _Slidify_ constitutes 
+This [current slide stack](https://shahstewart.github.io/slidifyDeck1/), created in _Slidify_ constitutes 
 this second part of the assignment.
 
 
